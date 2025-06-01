@@ -14,8 +14,7 @@ bibliotecaObj.adicionarLivro(Livro(titulo="Livro Teste", autor="Autor Teste"))
 
 while True:
     menu.menuInicial()
-    escolhaUser = str(input("\n"))
-    match escolhaUser:
+    match input():
         case "1":
             fluxo.fluxoAdicionarLivro(bibliotecaObj, menu)
         case "2":
