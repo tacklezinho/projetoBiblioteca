@@ -1,0 +1,39 @@
+# Ambiente virtual
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Arquivos de log e cache
+*.log
+*.sqlite3
+*.db
+*.pot
+*.mo
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de configuração de IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Configurações e caches do pytest
+.pytest_cache/
+.coverage
+.tox/
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Arquivos gerados por build
+build/
+dist/
+*.egg-info/
