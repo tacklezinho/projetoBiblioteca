@@ -10,7 +10,6 @@ def fluxoAdicionarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     autorLivro = str(input("Digite o autor do livro: "))
     livro = Livro(titulo=tituloLivro, autor=autorLivro)
     if livroJaExiste(livro=livro, biblioteca=biblioteca):
-        # Não Add Livro
         print("\n--- Esse livro que está tentando adicionar já existe ---\n")
     else:
         biblioteca.adicionarLivro(livro=livro)
@@ -25,5 +24,9 @@ def fluxoBuscarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     
 
 def fluxoListarLivros(biblioteca : Biblioteca, menu : ModuleType) -> None:
-    pass
+    for livro in biblioteca.livrosDb:
+        print("-------------------")
+        print(livro)
+        print("-------------------")
+    print("\n")
 
