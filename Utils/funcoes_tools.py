@@ -9,6 +9,16 @@ def livroJaExiste(livro : Livro, biblioteca : Biblioteca) -> bool:
     return False
 
 
+def getLivroByTitle(titulo:str, biblioteca:Biblioteca) -> None:
+    for livro in biblioteca.livrosDb:
+        if livro.titulo == titulo:
+            return livro
+    return "Livro Não Encontrado!"
+
+
+
+
+
 def getIndexByTitle(titulo:str, livrosDb:list)-> int:
     contador = 0
     for livro in livrosDb:

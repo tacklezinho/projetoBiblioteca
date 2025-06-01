@@ -1,7 +1,7 @@
 from types import ModuleType
 from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
-from Utils.funcoes_tools import livroJaExiste, retiraLivroPorTitulo
+from Utils.funcoes_tools import livroJaExiste, retiraLivroPorTitulo, getLivroByTitle
 
 
 
@@ -20,7 +20,9 @@ def fluxoRetirarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     retiraLivroPorTitulo(titulo=tituloLivro, biblioteca=biblioteca)
 
 def fluxoBuscarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
-    pass
+    tituloLivro = str(input("Digite o titulo que deseja buscar: "))
+    print("\n", getLivroByTitle(titulo=tituloLivro, biblioteca=biblioteca))
+    
 
 def fluxoListarLivros(biblioteca : Biblioteca, menu : ModuleType) -> None:
     pass
