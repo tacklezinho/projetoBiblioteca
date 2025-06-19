@@ -9,9 +9,6 @@ import Utils.fluxos_menus as fluxo
 #Cria a instancia da Biblioteca
 bibliotecaObj = Biblioteca(nomeBiblioteca=input("Digite o nome da sua biblioteca: "))
 
-#Adiciona um livro inicial para Debug
-bibliotecaObj.adicionarLivro(Livro(titulo="Livro Teste", autor="Autor Teste"))
-
 while True:
     menu.menuInicial()
     match input():

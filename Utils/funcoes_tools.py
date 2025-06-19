@@ -29,5 +29,8 @@ def getIndexByTitle(titulo:str, livrosDb:list)-> int:
 
 def retiraLivroPorTitulo(titulo, biblioteca:Biblioteca)-> None:
     indexLivro = getIndexByTitle(titulo=titulo, livrosDb=biblioteca.livrosDb)
-    biblioteca.livrosDb.pop(indexLivro)
-    print("Livro Retirado Com Sucesso!")
+    if indexLivro == None:
+        print("\nLivro não encontrado!")
+    else:
+        biblioteca.livrosDb.pop(indexLivro)
+        print("\nLivro Retirado Com Sucesso!")
