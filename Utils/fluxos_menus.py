@@ -9,10 +9,10 @@ def fluxoAdicionarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     tituloLivro = str(input("Digite o titulo do livro: "))
     autorLivro = str(input("Digite o autor do livro: "))
     livro = Livro(titulo=tituloLivro, autor=autorLivro)
-    if livroJaExiste(livro=livro, biblioteca=biblioteca):
-        print("\n--- Esse livro que está tentando adicionar já existe ---\n")
-    else:
-        biblioteca.adicionarLivro(livro=livro)
+    #if livroJaExiste(livro=livro, biblioteca=biblioteca):
+    #    print("\n--- Esse livro que está tentando adicionar já existe ---\n")
+    #else:
+    biblioteca.adicionarLivro(livro=livro)
 
 def fluxoRetirarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     tituloLivro = str(input("Digite o titulo que deseja retirar: "))
