@@ -1,7 +1,7 @@
 from types import ModuleType
 from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
-from Utils.funcoes_tools import livroJaExiste, retiraLivroPorTitulo, getLivroByTitle
+from Utils.funcoes_tools import livroExiste, getLivroByTitle
 
 
 
@@ -9,14 +9,18 @@ def fluxoAdicionarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     tituloLivro = str(input("Digite o titulo do livro: "))
     autorLivro = str(input("Digite o autor do livro: "))
     livro = Livro(titulo=tituloLivro, autor=autorLivro)
-    #if livroJaExiste(livro=livro, biblioteca=biblioteca):
-    #    print("\n--- Esse livro que está tentando adicionar já existe ---\n")
-    #else:
-    biblioteca.adicionarLivro(livro=livro)
+    if livroExiste(titulo=tituloLivro):
+        print("\n--- Esse livro que está tentando adicionar já existe ---\n")
+    else:
+        biblioteca.adicionarLivro(livro=livro)
 
 def fluxoRetirarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     tituloLivro = str(input("Digite o titulo que deseja retirar: "))
-    retiraLivroPorTitulo(titulo=tituloLivro, biblioteca=biblioteca)
+    if livroExiste(titulo=tituloLivro, biblioteca=biblioteca):
+        biblioteca.removerLivro(titulo=tituloLivro)
+        print("\nLivro removido com sucesso!")
+    else:
+        print("\n--- Livro não encontrado! ---\n")
 
 def fluxoBuscarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     tituloLivro = str(input("Digite o titulo que deseja buscar: "))
@@ -24,9 +28,4 @@ def fluxoBuscarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     
 
 def fluxoListarLivros(biblioteca : Biblioteca, menu : ModuleType) -> None:
-    for livro in biblioteca.livrosDb:
-        print("-------------------")
-        print(livro)
-        print("-------------------")
-    print("\n")
-
+    biblioteca.listarLivros()

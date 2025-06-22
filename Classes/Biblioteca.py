@@ -1,20 +1,19 @@
 from Classes.Livro import Livro
-import json
+from Utils.json_handler import carregarDadosDatabase, salvarDadosDatabase, criadorJsonDatabase
 
 class Biblioteca:
 
     def __init__(self, nomeBiblioteca):
         self.nomeBiblioteca = nomeBiblioteca
-        self.livrosDb = {"Livros":[]}
+        criadorJsonDatabase()
+        self.livrosDb = carregarDadosDatabase()
 
     def adicionarLivro(self, livro):
         
         if isinstance(livro, Livro):
             livroDict = {"Titulo":livro.titulo, "Autor":livro.autor, "Disponivel":livro.disponivel}
             self.livrosDb["Livros"].append(livroDict)
-            
-            with open(r"Database/livros.json", "w") as f:        
-                json.dump(self.livrosDb, f, indent=2)
+            salvarDadosDatabase(livrosDatabase=self.livrosDb)
             print("\nLivro Adicionado Com Sucesso!")
         
         else:
@@ -22,5 +21,18 @@ class Biblioteca:
 
 
     def listarLivros(self):
-        for livro in self.livrosDb:
-            print(livro)
+        livros = self.livrosDb["Livros"]
+        for livro in livros:
+            print("\n----------------")
+            print("Titulo: ", livro["Titulo"])
+            print("Autor: ", livro["Autor"])
+            print("Disponivel: ", livro["Disponivel"])
+            print("----------------")
+
+
+    def removerLivro(self, titulo):
+        livros = self.livrosDb["Livros"]
+        for i, livro in enumerate(livros):
+            if livro["Titulo"] == titulo:
+                del livros[i]
+                salvarDadosDatabase(self.livrosDb)
