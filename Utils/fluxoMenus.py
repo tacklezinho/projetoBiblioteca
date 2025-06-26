@@ -1,4 +1,3 @@
-from types import ModuleType
 from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
 from Utils.tools import livroExiste
@@ -6,7 +5,7 @@ from Classes.Usuario import Usuario
 
 
 
-def fluxoAdicionarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
+def fluxoAdicionarLivro(biblioteca : Biblioteca) -> None:
     tituloLivro = str(input("Digite o titulo do livro: "))
     autorLivro = str(input("Digite o autor do livro: "))
     livro = Livro(titulo=tituloLivro, autor=autorLivro)
@@ -15,16 +14,28 @@ def fluxoAdicionarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
     else:
         biblioteca.adicionarLivro(livro=livro)
 
-def fluxoRetirarLivro(biblioteca : Biblioteca, menu : ModuleType) -> None:
+def fluxoRetirarLivro(biblioteca : Biblioteca) -> None:
     tituloLivro = str(input("Digite o titulo que deseja retirar: "))
     if livroExiste(titulo=tituloLivro, biblioteca=biblioteca):
-        biblioteca.removerLivro(titulo=tituloLivro)
-        print("\nLivro removido com sucesso!")
+        if biblioteca.verificarDisponibilidade(tituloLivro=tituloLivro):
+            biblioteca.removerLivro(titulo=tituloLivro)
+            print("\n-- Livro removido com sucesso! --")
+        else:
+            print("\n-- Livro não está disponível --")
     else:
         print("\n--- Livro não encontrado! ---\n")
 
-def fluxoListarLivros(biblioteca : Biblioteca, menu : ModuleType) -> None:
+def fluxoListarLivros(biblioteca : Biblioteca) -> None:
+    # Mostrar Somente os Livros Disponiveis
     biblioteca.listarLivros()
+
+def fluxoBuscarLivro(biblioteca: Biblioteca):
+    tituloLivro = str(input("Digite o titulo que deseja buscar: "))
+    if livroExiste(titulo=tituloLivro, biblioteca=biblioteca):
+        livroDict = biblioteca.buscarLivro(titulo=tituloLivro)
+        print(f"""\nTitulo: {livroDict["Titulo"]}\nAutor: {livroDict["Autor"]}\nDisponivel: {livroDict["Disponivel"]}""")
+    else:
+        print("\n-- Livro não encontrado --")
 
 def fluxoEmprestarLivro(usuarioAtual:Usuario, biblioteca:Biblioteca, autenticador):
         tituloLivro = str(input("Digite o titulo que deseja retirar: "))
@@ -36,3 +47,18 @@ def fluxoEmprestarLivro(usuarioAtual:Usuario, biblioteca:Biblioteca, autenticado
                 usuarioAtual.emprestarLivro(livro=livro)
                 biblioteca.alterarDisponibilidade(livro["Titulo"])
                 autenticador.atualizarUsuarios(usuarioAtual.toDict())
+                print("\n-- Livro Emprestado Com Sucesso --")
+            else:
+                print("\n-- Livro Não Está Disponivel --")
+
+def fluxoTornarBibliotecario(autenticador):
+    nomeUser = str(input("Digite o nome de usuário que deseja tornar bibliotecário: "))
+    if not autenticador.verificarAdminAcess(username=nomeUser):
+        if autenticador.tornarBibliotecario(username=nomeUser):
+            print("\n-- Usuário alterado com sucesso! --")
+    else:
+        print("\n-- Usuário já é bibliotecário --")
+
+
+def fluxoTrocarConta():
+    pass

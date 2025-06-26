@@ -9,10 +9,14 @@ class Autenticador:
 
     def cadastroUser(self, usuario:Usuario):
         if isinstance(usuario, Usuario):
-            userDict = {"User":usuario.nomeUsuario, "Password":usuario.senhaUsuario, "AdminAcess":usuario.bibliotecario, "LivrosPossuidos":usuario.livrosPossuidos}
-            self.usuariosDatabase["Usuarios"].append(userDict)
-            salvarDadosDatabaseUser(usuariosDatabase=self.usuariosDatabase)
-            return True
+            if not self.usuarioExiste(username=usuario.nomeUsuario):
+                userDict = {"User":usuario.nomeUsuario, "Password":usuario.senhaUsuario, "AdminAcess":usuario.bibliotecario, "LivrosPossuidos":usuario.livrosPossuidos}
+                self.usuariosDatabase["Usuarios"].append(userDict)
+                salvarDadosDatabaseUser(usuariosDatabase=self.usuariosDatabase)
+                return True
+            else:
+                print("\n-- Usuário já existe --")
+                return False
         else:
             print("\nAdicione apenas objetos do tipo Usuario")
             return False
@@ -50,3 +54,21 @@ class Autenticador:
             if user["User"] == username:
                 del usuarios[contagem]
                 salvarDadosDatabaseUser(usuariosDatabase=self.usuariosDatabase)
+
+    
+    def tornarBibliotecario(self, username:str):
+        if self.usuarioExiste(username=username):
+            userDict = self.usuarioNoBancoDeDados(username=username)
+            userDict["AdminAcess"]=True
+            self.atualizarUsuarios(userDict)
+            return True
+        else:
+            print("-- Usuario não existe --")
+
+
+    def verificarAdminAcess(self, username:str):
+        userDict = self.usuarioNoBancoDeDados(username=username)
+        if userDict["AdminAcess"] == True:
+            return True
+        else:
+            return False

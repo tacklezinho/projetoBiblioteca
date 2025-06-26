@@ -19,8 +19,7 @@ def fluxoCadastroUsuario(autenticador:Autenticador) -> None:
     passInput = str(input("Digite a senha do usuario: "))
     usuario = Usuario(nomeUsuario=userInput, senhaUsuario=passInput)
     if autenticador.cadastroUser(usuario): #Cria o usuario no banco de dados
-        print("\nUsuario Cadastrado Com Sucesso!")
-
+        print("\n-- Usuario Cadastrado Com Sucesso! --")
 
 def getSessaoAtual() -> Usuario:
     dados = carregarSessaoAtual()

@@ -1,7 +1,6 @@
-from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
 from Classes.Autenticador import Autenticador
-from Utils.tools import *
+
 import Utils.simpleMenus as menu
 import Utils.fluxoMenus as fluxo
 import Utils.fluxoLoginCadastro as logCad
@@ -17,32 +16,50 @@ def fluxoMenusUsuario(usuarioAtual):
                 pass
             case "3":
                 pass
+            case "4":
+                main()
 
 def fluxoMenusBibliotecario():
-    menu.menuInicialBibliotecario()
+    while True:
+        menu.menuInicialBibliotecario()
+        match str(input()):
+            case "1":
+                fluxo.fluxoAdicionarLivro(biblioteca=bibliotecaObj)
+            case "2":
+                fluxo.fluxoRetirarLivro(biblioteca=bibliotecaObj)
+            case "3":
+                fluxo.fluxoBuscarLivro(biblioteca=bibliotecaObj)
+            case "4":
+                fluxo.fluxoListarLivros(biblioteca=bibliotecaObj)
+            case "5":
+                fluxo.fluxoTornarBibliotecario(autenticador=autenticador)
+            case "6":
+                main()
+
+
+def main():
+    while True:
+        menu.menuLoginOuCadastro()
+        match input():
+            case "1":
+                if logCad.fluxoLoginUsuario(autenticador):
+                    usuarioAtual = logCad.getSessaoAtual()
+                    if usuarioAtual.bibliotecario:
+                        fluxoMenusBibliotecario()
+                    else:
+                        fluxoMenusUsuario(usuarioAtual)
+                    break
+            case "2":
+                logCad.fluxoCadastroUsuario(autenticador)
 
 
 
-
-
-
+#Cria a instancia do Autenticador
 autenticador = Autenticador()
 
 #Cria a instancia da Biblioteca
-bibliotecaObj = Biblioteca(nomeBiblioteca=input("Digite o nome da sua biblioteca: "))
+bibliotecaObj = Biblioteca()
 
 
-while True:
-    menu.menuLoginOuCadastro()
-    match input():
-        case "1":
-            if logCad.fluxoLoginUsuario(autenticador):
-                usuarioAtual = logCad.getSessaoAtual()
-                if usuarioAtual.bibliotecario:
-                    fluxoMenusBibliotecario()
-                else:
-                    fluxoMenusUsuario(usuarioAtual)
-                break
-        case "2":
-            logCad.fluxoCadastroUsuario(autenticador)
+main()
 

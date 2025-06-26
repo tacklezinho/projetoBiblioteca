@@ -3,7 +3,7 @@
     {
       "User": "Admin",
       "Password": "Admin",
-      "AdminAcess": false,
+      "AdminAcess": true,
       "LivrosPossuidos": []
     },
     {

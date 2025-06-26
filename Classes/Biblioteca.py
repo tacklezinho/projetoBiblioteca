@@ -3,8 +3,7 @@ from Utils.jsonHandler import carregarDadosDatabase, salvarDadosDatabase, criado
 
 class Biblioteca:
 
-    def __init__(self, nomeBiblioteca:str):
-        self.nomeBiblioteca = nomeBiblioteca
+    def __init__(self):
         criadorJsonDatabase()
         self.livrosDb = carregarDadosDatabase()
 
@@ -23,11 +22,12 @@ class Biblioteca:
     def listarLivros(self):
         livros = self.livrosDb["Livros"]
         for livro in livros:
-            print("\n----------------")
-            print("Titulo: ", livro["Titulo"])
-            print("Autor: ", livro["Autor"])
-            print("Disponivel: ", livro["Disponivel"])
-            print("----------------")
+            if livro["Disponivel"]:
+                print("\n----------------")
+                print("Titulo: ", livro["Titulo"])
+                print("Autor: ", livro["Autor"])
+                print("Disponivel: ", livro["Disponivel"])
+                print("----------------")
 
 
     def removerLivro(self, titulo:str):
@@ -38,7 +38,7 @@ class Biblioteca:
                 salvarDadosDatabase(self.livrosDb)
 
     
-    def buscarLivro(self, titulo:str) -> Livro:
+    def buscarLivro(self, titulo:str) -> dict:
         livros = self.livrosDb["Livros"]
         for livro in livros:
             if livro["Titulo"] == titulo:

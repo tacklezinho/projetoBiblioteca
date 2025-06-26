@@ -1,11 +1,6 @@
 {
   "Livros": [
     {
-      "Titulo": "Dom Chicote",
-      "Autor": "Miguel de Cervantes Saavedra",
-      "Disponivel": false
-    },
-    {
       "Titulo": "Big Dick",
       "Autor": "Herman Melville",
       "Disponivel": true
@@ -13,6 +8,11 @@
     {
       "Titulo": "Dom Cashmurro",
       "Autor": "Machado de Assis",
+      "Disponivel": false
+    },
+    {
+      "Titulo": "Dom Chicote",
+      "Autor": "Miguel de Cervantes Saavedra",
       "Disponivel": false
     }
   ]
