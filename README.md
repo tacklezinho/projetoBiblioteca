@@ -1,2 +1,2 @@
 # projetoBiblioteca
-Projeto Biblioteca em Python e Bando de Dados JSON
+Projeto Biblioteca em Python e Banco de Dados JSON

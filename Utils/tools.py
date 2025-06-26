@@ -8,7 +8,3 @@ def livroExiste(titulo : str, biblioteca : Biblioteca) -> bool:
         if livroInDb["Titulo"] == titulo:
             return True
     return False
-
-
-def alterarDisponibilidade(biblioteca:Biblioteca):
-    pass
