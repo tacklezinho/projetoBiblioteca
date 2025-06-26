@@ -1,25 +1,65 @@
-from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
-from Utils.funcoes_tools import *
-import Utils.menus_utils as menu
-import Utils.fluxos_menus as fluxo
+from Classes.Autenticador import Autenticador
+
+import Utils.simpleMenus as menu
+import Utils.fluxoMenus as fluxo
+import Utils.fluxoLoginCadastro as logCad
 
 
+def fluxoMenusUsuario(usuarioAtual):
+    while True:
+        menu.menuInicialUsuario()
+        match str(input()):
+            case "1":
+                fluxo.fluxoEmprestarLivro(usuarioAtual=usuarioAtual, biblioteca=bibliotecaObj, autenticador=autenticador)
+            case "2":
+                fluxo.fluxoDevolverLivro(biblioteca=bibliotecaObj, userAtual=usuarioAtual, autenticador=autenticador)
+            case "3":
+                fluxo.fluxoListarLivros(biblioteca=bibliotecaObj)
+            case "4":
+                main()
+
+def fluxoMenusBibliotecario():
+    while True:
+        menu.menuInicialBibliotecario()
+        match str(input()):
+            case "1":
+                fluxo.fluxoAdicionarLivro(biblioteca=bibliotecaObj)
+            case "2":
+                fluxo.fluxoRetirarLivro(biblioteca=bibliotecaObj)
+            case "3":
+                fluxo.fluxoBuscarLivro(biblioteca=bibliotecaObj)
+            case "4":
+                fluxo.fluxoListarLivros(biblioteca=bibliotecaObj)
+            case "5":
+                fluxo.fluxoTornarBibliotecario(autenticador=autenticador)
+            case "6":
+                main()
+
+
+def main():
+    while True:
+        menu.menuLoginOuCadastro()
+        match input():
+            case "1":
+                if logCad.fluxoLoginUsuario(autenticador):
+                    usuarioAtual = logCad.getSessaoAtual()
+                    if usuarioAtual.bibliotecario:
+                        fluxoMenusBibliotecario()
+                    else:
+                        fluxoMenusUsuario(usuarioAtual)
+                    break
+            case "2":
+                logCad.fluxoCadastroUsuario(autenticador)
+
+
+
+#Cria a instancia do Autenticador
+autenticador = Autenticador()
 
 #Cria a instancia da Biblioteca
-bibliotecaObj = Biblioteca(nomeBiblioteca=input("Digite o nome da sua biblioteca: "))
+bibliotecaObj = Biblioteca()
 
-#Adiciona um livro inicial para Debug
-bibliotecaObj.adicionarLivro(Livro(titulo="Livro Teste", autor="Autor Teste"))
 
-while True:
-    menu.menuInicial()
-    match input():
-        case "1":
-            fluxo.fluxoAdicionarLivro(bibliotecaObj, menu)
-        case "2":
-            fluxo.fluxoRetirarLivro(bibliotecaObj, menu)
-        case "3":
-            fluxo.fluxoBuscarLivro(bibliotecaObj, menu)
-        case "4":
-            fluxo.fluxoListarLivros(bibliotecaObj, menu)
+main()
+

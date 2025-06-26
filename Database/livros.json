@@ -1,0 +1,19 @@
+{
+  "Livros": [
+    {
+      "Titulo": "Big Dick",
+      "Autor": "Herman Melville",
+      "Disponivel": true
+    },
+    {
+      "Titulo": "Dom Cashmurro",
+      "Autor": "Machado de Assis",
+      "Disponivel": true
+    },
+    {
+      "Titulo": "Dom Chicote",
+      "Autor": "Miguel de Cervantes Saavedra",
+      "Disponivel": true
+    }
+  ]
+}
