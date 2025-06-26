@@ -3,7 +3,7 @@
     {
       "Titulo": "Dom Chicote",
       "Autor": "Miguel de Cervantes Saavedra",
-      "Disponivel": true
+      "Disponivel": false
     },
     {
       "Titulo": "Big Dick",
@@ -13,7 +13,7 @@
     {
       "Titulo": "Dom Cashmurro",
       "Autor": "Machado de Assis",
-      "Disponivel": true
+      "Disponivel": false
     }
   ]
 }

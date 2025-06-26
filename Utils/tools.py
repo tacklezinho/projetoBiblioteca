@@ -10,8 +10,5 @@ def livroExiste(titulo : str, biblioteca : Biblioteca) -> bool:
     return False
 
 
-def getLivroByTitle(titulo:str, biblioteca:Biblioteca) -> None:
-    for livro in biblioteca.livrosDb:
-        if livro.titulo == titulo:
-            return livro
-    return "Livro Não Encontrado!"
+def alterarDisponibilidade(biblioteca:Biblioteca):
+    pass

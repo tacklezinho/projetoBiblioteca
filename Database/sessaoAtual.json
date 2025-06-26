@@ -1,0 +1,15 @@
+{
+  "User": "Lucas",
+  "Password": "123",
+  "AdminAcess": false,
+  "LivrosPossuidos": [
+    {
+      "Titulo": "Dom Chicote",
+      "Autor": "Miguel de Cervantes Saavedra"
+    },
+    {
+      "Titulo": "Dom Cashmurro",
+      "Autor": "Machado de Assis"
+    }
+  ]
+}

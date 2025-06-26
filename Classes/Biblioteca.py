@@ -1,14 +1,14 @@
 from Classes.Livro import Livro
-from Utils.json_handler import carregarDadosDatabase, salvarDadosDatabase, criadorJsonDatabase
+from Utils.jsonHandler import carregarDadosDatabase, salvarDadosDatabase, criadorJsonDatabase
 
 class Biblioteca:
 
-    def __init__(self, nomeBiblioteca):
+    def __init__(self, nomeBiblioteca:str):
         self.nomeBiblioteca = nomeBiblioteca
         criadorJsonDatabase()
         self.livrosDb = carregarDadosDatabase()
 
-    def adicionarLivro(self, livro):
+    def adicionarLivro(self, livro:Livro):
         
         if isinstance(livro, Livro):
             livroDict = {"Titulo":livro.titulo, "Autor":livro.autor, "Disponivel":livro.disponivel}
@@ -30,9 +30,40 @@ class Biblioteca:
             print("----------------")
 
 
-    def removerLivro(self, titulo):
+    def removerLivro(self, titulo:str):
         livros = self.livrosDb["Livros"]
         for i, livro in enumerate(livros):
             if livro["Titulo"] == titulo:
                 del livros[i]
                 salvarDadosDatabase(self.livrosDb)
+
+    
+    def buscarLivro(self, titulo:str) -> Livro:
+        livros = self.livrosDb["Livros"]
+        for livro in livros:
+            if livro["Titulo"] == titulo:
+                return livro
+    
+        return None
+            
+
+    def alterarDisponibilidade(self, tituloLivro:str):
+        livros = self.livrosDb["Livros"]
+        for livro in livros:
+            if livro["Titulo"] == tituloLivro:
+                
+                if livro["Disponivel"]:
+                    livro["Disponivel"] = False
+                else:
+                    livro["Disponivel"] = True
+        salvarDadosDatabase(self.livrosDb)
+
+
+    def verificarDisponibilidade(self, tituloLivro:str):
+        livros = self.livrosDb["Livros"]
+        for livro in livros:
+            if livro["Titulo"] == tituloLivro:
+                if livro["Disponivel"]:
+                    return True
+                else:
+                    return False
