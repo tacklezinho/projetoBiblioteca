@@ -8,12 +8,12 @@
     {
       "Titulo": "Dom Cashmurro",
       "Autor": "Machado de Assis",
-      "Disponivel": false
+      "Disponivel": true
     },
     {
       "Titulo": "Dom Chicote",
       "Autor": "Miguel de Cervantes Saavedra",
-      "Disponivel": false
+      "Disponivel": true
     }
   ]
 }

@@ -2,6 +2,7 @@ from Classes.Livro import Livro
 from Classes.Biblioteca import Biblioteca
 from Utils.tools import livroExiste
 from Classes.Usuario import Usuario
+from Classes.Autenticador import Autenticador
 
 
 
@@ -37,7 +38,7 @@ def fluxoBuscarLivro(biblioteca: Biblioteca):
     else:
         print("\n-- Livro não encontrado --")
 
-def fluxoEmprestarLivro(usuarioAtual:Usuario, biblioteca:Biblioteca, autenticador):
+def fluxoEmprestarLivro(usuarioAtual:Usuario, biblioteca:Biblioteca, autenticador: Autenticador):
         tituloLivro = str(input("Digite o titulo que deseja retirar: "))
         livro = biblioteca.buscarLivro(titulo=tituloLivro)
         if livro == None:
@@ -51,14 +52,23 @@ def fluxoEmprestarLivro(usuarioAtual:Usuario, biblioteca:Biblioteca, autenticado
             else:
                 print("\n-- Livro Não Está Disponivel --")
 
-def fluxoTornarBibliotecario(autenticador):
+def fluxoDevolverLivro(biblioteca: Biblioteca, userAtual: Usuario, autenticador:Autenticador):
+    userAtual.listarLivrosPessoais() #Print Seus Livros
+    tituloLivro = str(input("\nDigite o título que deseja devolver: ")) # Qual Livro Deseja Devolver
+    if userAtual.devolverLivro(tituloLivro=tituloLivro):
+        biblioteca.alterarDisponibilidade(tituloLivro=tituloLivro)
+        autenticador.atualizarUsuarios(userAtual.toDict())
+        print("\n-- Livro devolvido com sucesso --")
+    else:
+        print("\n-- Erro ao devolver o livro --")
+    
+    userAtual# Remover Livro da Sessao e do Db
+    # Alterar Disponibilidade
+
+def fluxoTornarBibliotecario(autenticador:Autenticador):
     nomeUser = str(input("Digite o nome de usuário que deseja tornar bibliotecário: "))
     if not autenticador.verificarAdminAcess(username=nomeUser):
         if autenticador.tornarBibliotecario(username=nomeUser):
             print("\n-- Usuário alterado com sucesso! --")
     else:
         print("\n-- Usuário já é bibliotecário --")
-
-
-def fluxoTrocarConta():
-    pass

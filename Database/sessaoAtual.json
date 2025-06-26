@@ -1,6 +1,6 @@
 {
-  "User": "Admin",
-  "Password": "Admin",
-  "AdminAcess": true,
+  "User": "Lucas",
+  "Password": "123",
+  "AdminAcess": false,
   "LivrosPossuidos": []
 }

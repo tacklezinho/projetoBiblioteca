@@ -23,5 +23,5 @@ def fluxoCadastroUsuario(autenticador:Autenticador) -> None:
 
 def getSessaoAtual() -> Usuario:
     dados = carregarSessaoAtual()
-    user = Usuario(nomeUsuario=dados["User"], senhaUsuario=dados["Password"], bibliotecario=dados["AdminAcess"])
+    user = Usuario(nomeUsuario=dados["User"], senhaUsuario=dados["Password"], bibliotecario=dados["AdminAcess"], livrosPossuidos=dados["LivrosPossuidos"])
     return user

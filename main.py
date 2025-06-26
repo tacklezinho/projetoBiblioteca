@@ -13,9 +13,9 @@ def fluxoMenusUsuario(usuarioAtual):
             case "1":
                 fluxo.fluxoEmprestarLivro(usuarioAtual=usuarioAtual, biblioteca=bibliotecaObj, autenticador=autenticador)
             case "2":
-                pass
+                fluxo.fluxoDevolverLivro(biblioteca=bibliotecaObj, userAtual=usuarioAtual, autenticador=autenticador)
             case "3":
-                pass
+                fluxo.fluxoListarLivros(biblioteca=bibliotecaObj)
             case "4":
                 main()
 
