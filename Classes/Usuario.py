@@ -3,11 +3,11 @@ from Utils.jsonHandler import sessaoAtual, carregarSessaoAtual
 class Usuario:
     
 
-    def __init__(self, nomeUsuario:str, senhaUsuario:str, bibliotecario=False, livrosPossuidos=[]):
+    def __init__(self, nomeUsuario:str, senhaUsuario:str, bibliotecario=False, livrosPossuidos=None):
         self.nomeUsuario = nomeUsuario
         self.senhaUsuario = senhaUsuario
         self.bibliotecario = bibliotecario
-        self.livrosPossuidos = livrosPossuidos
+        self.livrosPossuidos = livrosPossuidos if livrosPossuidos is not None else []
 
 
     def emprestarLivro(self, livro:dict) -> None:

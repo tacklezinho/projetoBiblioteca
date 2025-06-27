@@ -7,7 +7,7 @@ class Biblioteca:
         criadorJsonDatabase()
         self.livrosDb = carregarDadosDatabase()
 
-    def adicionarLivro(self, livro:Livro):
+    def adicionarLivro(self, livro:Livro) -> bool:
         
         if isinstance(livro, Livro):
             livroDict = {"Titulo":livro.titulo, "Autor":livro.autor, "Disponivel":livro.disponivel}
@@ -19,7 +19,7 @@ class Biblioteca:
             print("\nAdicione apenas objetos do tipo Livro")
 
 
-    def listarLivros(self):
+    def listarLivros(self) -> None:
         livros = self.livrosDb["Livros"]
         for livro in livros:
             if livro["Disponivel"]:
@@ -30,7 +30,7 @@ class Biblioteca:
                 print("----------------")
 
 
-    def removerLivro(self, titulo:str):
+    def removerLivro(self, titulo:str) -> None:
         livros = self.livrosDb["Livros"]
         for i, livro in enumerate(livros):
             if livro["Titulo"] == titulo:

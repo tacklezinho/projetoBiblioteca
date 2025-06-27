@@ -7,7 +7,7 @@ class Autenticador:
         criadorJsonDatabaseUser()
         self.usuariosDatabase = carregarDadosDatabaseUser()
 
-    def cadastroUser(self, usuario:Usuario):
+    def cadastroUser(self, usuario:Usuario) -> bool:
         if isinstance(usuario, Usuario):
             if not self.usuarioExiste(username=usuario.nomeUsuario):
                 userDict = {"User":usuario.nomeUsuario, "Password":usuario.senhaUsuario, "AdminAcess":usuario.bibliotecario, "LivrosPossuidos":usuario.livrosPossuidos}
@@ -35,20 +35,17 @@ class Autenticador:
                 return usuario
             
 
-    def usuarioExiste(self, username:str):
-        if self.usuarioNoBancoDeDados(username=username) != None:
-            return True
-        else:
-            return False        
+    def usuarioExiste(self, username:str) -> bool:
+        return self.usuarioNoBancoDeDados(username=username) is not None     
 
-    def atualizarUsuarios(self, userAtual:dict):
+    def atualizarUsuarios(self, userAtual:dict) -> None:
         if self.usuarioExiste(username=userAtual["User"]):
             self.removerUser(username=userAtual["User"])
             self.usuariosDatabase["Usuarios"].append(userAtual)
             salvarDadosDatabaseUser(self.usuariosDatabase)
 
 
-    def removerUser(self, username:str):
+    def removerUser(self, username:str) -> None:
         usuarios = self.usuariosDatabase["Usuarios"]
         for contagem, user in enumerate(usuarios):
             if user["User"] == username:
@@ -56,7 +53,7 @@ class Autenticador:
                 salvarDadosDatabaseUser(usuariosDatabase=self.usuariosDatabase)
 
     
-    def tornarBibliotecario(self, username:str):
+    def tornarBibliotecario(self, username:str) -> bool:
         if self.usuarioExiste(username=username):
             userDict = self.usuarioNoBancoDeDados(username=username)
             userDict["AdminAcess"]=True
@@ -66,9 +63,6 @@ class Autenticador:
             print("-- Usuario não existe --")
 
 
-    def verificarAdminAcess(self, username:str):
+    def verificarAdminAcess(self, username:str) -> bool:
         userDict = self.usuarioNoBancoDeDados(username=username)
-        if userDict["AdminAcess"] == True:
-            return True
-        else:
-            return False
+        return userDict["AdminAcess"]
